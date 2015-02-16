@@ -1,0 +1,15 @@
+{
+  "name": "qw6",
+  "version": "1.0.0",
+  "description": "A one-liner implementation of perl's `qw` in ES6.",
+  "main": "qw6.js",
+  "scripts": {
+    "test": "babel-node `which _mocha`"
+  },
+  "author": "Bryan English <bryan@bryanenglish.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "babel": "^4.0.1",
+    "mocha": "^2.1.0"
+  }
+}
