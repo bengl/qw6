@@ -1,32 +1,28 @@
 import qw from './qw6'
-import {deepEqual} from 'assert'
+import {deepEqual as eq} from 'assert'
+import pitesti from 'pitesti'
 
-let singleLine = 'foo bar baz'
-let multiLine = `foo
+const test = pitesti()
+
+const assert = r => Promise.resolve().then(() => eq(r, ['foo', 'bar', 'baz']))
+
+test('single line, space-delimited', assert(qw`foo bar baz`))
+
+test('single line, space-delimited, extra spaces', assert(qw`  foo bar baz `))
+
+test('multi-line', assert(qw`foo
 bar
-baz`
-let singleLineSpaces = '  foo bar baz '
-let multiLineSpaces = `
+baz`))
+
+test('multi-line, extra spaces', assert(qw`
      foo
      bar
      baz
-`
-let multiComplexLine = `
+`))
+
+test('multi-line, complex lines', assert(qw`
      foo bar
      baz
-`
+`))
 
-let assertExpected = r => deepEqual(r, ['foo', 'bar', 'baz'])
-
-describe('qw6', () => {
-    it('works on single line, space-delimited', () =>
-            assertExpected(qw`${singleLine}`))
-    it('works on single line, space-delimited with extra spaces', () =>
-            assertExpected(qw`${singleLineSpaces}`))
-    it('works on multi-line', () =>
-            assertExpected(qw`${multiLine}`))
-    it('works on multi-line with extra spaces', () =>
-            assertExpected(qw`${multiLineSpaces}`))
-    it('works on multi-line with complex lines', () =>
-            assertExpected(qw`${multiComplexLine}`))
-})
+test()
