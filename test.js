@@ -4,7 +4,7 @@ import pitesti from 'pitesti'
 
 const test = pitesti()
 
-const assert = r => Promise.resolve().then(() => eq(r, ['foo', 'bar', 'baz']))
+const assert = (r) => () => eq(r, ['foo', 'bar', 'baz'])
 
 test('single line, space-delimited', assert(qw`foo bar baz`))
 
